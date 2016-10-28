@@ -97,14 +97,20 @@ function diagonal(board, col, piece) {
 	//
 }
 
+function minimax(board, depth) {
+	board.forEach((col, i) => {
+		let state = JSON.parse(JSON.stringify(board));
+		insertPiece(state, i, depth % 2 == 0 ? 'X' : 'O');
+		minimax(state, JSON.parse(JSON.stringify(depth + 1)));
+		printBoard(state);
+	})
+}
+
 const board = generateBoard(6, 7);
 
-insertPiece(board, 3, 'X');
-insertPiece(board, 3, 'X');
-insertPiece(board, 3, 'X');
+minimax(board, 0);
 
-printBoard(board);
 
-console.log(vertical(board, 3, 'X'));
+//console.log(vertical(board, 3, 'X'));
 //console.log(horizontal(board, 3, 'X'));
 //console.log(diagonal(board, 3, 'X'));
